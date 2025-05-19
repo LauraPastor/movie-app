@@ -2,12 +2,12 @@ const { dark } = require('@mui/material/styles/createPalette');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./app/**/*.{js,jsx,ts,tsx}'],
+  content: ['./app/**/*.{js,jsx,ts,tsx}', './components/**/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
   theme: {
     extend: {
       colors: {
-        primary: '#1E3A8A',
+        primary: '#030014',
         secondary: '#9333EA',
         light: {
           100: '#F3F4F6',
