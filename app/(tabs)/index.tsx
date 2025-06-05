@@ -3,26 +3,26 @@ import { images } from "@/assets/constants/images";
 import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar";
 import { fetchMovies } from "@/services/api";
+import { getTrendingMovies } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
 import { useRouter } from "expo-router";
 import { ActivityIndicator, FlatList, Image, ScrollView, Text, View } from "react-native";
 
 const Index = () => {
   const router = useRouter();
+  const { data: trendingMovies, loading: trendingLoading, error: trendingError } = useFetch(getTrendingMovies);
   const { data: movies, loading: moviesLoading, error: moviesError } = useFetch(() => fetchMovies({ query: '' }))
   return (
     <View className="flex-1 bg-primary">
       <Image source={images.bg} className="absolute w-full" />
       <ScrollView className="flex-1 px-5" showsVerticalScrollIndicator={false} contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }} >
         <Image source={icons.logo} className="w-12 h-10 mt-20 mb-5 mx-auto" />
-        {moviesLoading ? (<ActivityIndicator size="large" color="#0000ff" className="mt-10" />)
-          : moviesError ? (<Text>Error: {moviesError?.message}</Text>)
+        {moviesLoading || trendingLoading ? (<ActivityIndicator size="large" color="#0000ff" className="mt-10" />)
+          : moviesError || trendingError ? (<Text>Error: {moviesError?.message || trendingError?.message}</Text>)
             : (<View>
               <SearchBar
                 onPress={() => router.push('/search')}
                 placeholder="Search for a movie"
-                value=""
-                onChangeText={() => { }}
               />
               <>
                 <Text className="text-lg text-white font-bold mt-5 mb-3" >Latest Movies</Text>

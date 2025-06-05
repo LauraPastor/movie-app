@@ -40,3 +40,23 @@ export const updateSearchCount = async (query: string, movie: Movie) => {
     throw error;
   }
 };
+
+export const getTrendingMovies = async () => {
+  try {
+    const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+      Query.orderDesc("count"),
+      Query.limit(10),
+    ]);
+    return result.documents.map((doc) => ({
+      id: doc.movie_id,
+      title: doc.title,
+      poster_path: doc.poster_url.replace(
+        "https://image.tmdb.org/t/p/w500",
+        ""
+      ),
+    }));
+  } catch (error) {
+    console.error("Error fetching trending movies:", error);
+    throw error;
+  }
+};
