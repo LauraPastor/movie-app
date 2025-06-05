@@ -24,6 +24,21 @@ const Index = () => {
                 onPress={() => router.push('/search')}
                 placeholder="Search for a movie"
               />
+              {trendingMovies &&
+                <View className="mt-10">
+                  <Text className="text-lg text-white font-bold mb-3">Trending Movies</Text>
+                  <FlatList
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    ItemSeparatorComponent={() => <View className="w-4" />}
+                    className="mb-4 mt-3"
+                    data={trendingMovies}
+                    renderItem={({ item, index }) => (
+                      <Text className="text-white text-sm" >{item.title}</Text>
+                    )}
+                    keyExtractor={(item) => item.id.toString()}
+                  />
+                </View>}
               <>
                 <Text className="text-lg text-white font-bold mt-5 mb-3" >Latest Movies</Text>
                 <FlatList
