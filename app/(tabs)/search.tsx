@@ -34,7 +34,7 @@ const Search = () => {
             <FlatList
                 data={movies}
                 renderItem={({ item }) => <MovieCard {...item} />}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item) => item.movie_id.toString()}
                 className='px-5'
                 numColumns={3}
                 columnWrapperStyle={{

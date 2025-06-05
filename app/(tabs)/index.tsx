@@ -2,6 +2,7 @@ import { icons } from "@/assets/constants/icons";
 import { images } from "@/assets/constants/images";
 import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar";
+import TrendingCard from "@/components/TrendingCard";
 import { fetchMovies } from "@/services/api";
 import { getTrendingMovies } from "@/services/appwrite";
 import useFetch from "@/services/useFetch";
@@ -34,9 +35,12 @@ const Index = () => {
                     className="mb-4 mt-3"
                     data={trendingMovies}
                     renderItem={({ item, index }) => (
-                      <Text className="text-white text-sm" >{item.title}</Text>
+                      <TrendingCard
+                        movie={item}
+                        index={index}
+                      />
                     )}
-                    keyExtractor={(item) => item.id.toString()}
+                    keyExtractor={(item) => item.movie_id.toString()}
                   />
                 </View>}
               <>
