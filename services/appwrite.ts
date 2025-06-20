@@ -48,12 +48,14 @@ export const getTrendingMovies = async () => {
       Query.limit(10),
     ]);
     return result.documents.map((doc) => ({
-      id: doc.movie_id,
+      movie_id: doc.movie_id,
       title: doc.title,
       poster_path: doc.poster_url.replace(
         "https://image.tmdb.org/t/p/w500",
         ""
       ),
+      poster_url: doc.poster_url,
+      count: doc.count,
     }));
   } catch (error) {
     console.error("Error fetching trending movies:", error);
